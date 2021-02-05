@@ -6,6 +6,7 @@ import lk.ijse.dep.web.lms.dto.MemberDTO;
 
 import lk.ijse.dep.web.lms.entity.Book;
 import lk.ijse.dep.web.lms.entity.Borrowal;
+import lk.ijse.dep.web.lms.entity.BorrowalPK;
 import lk.ijse.dep.web.lms.entity.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -34,7 +35,12 @@ public interface EntityDTOMapper {
 
     @Mapping(target = "member",ignore = true)
     @Mapping(target = "book",ignore = true)
+    @Mapping(source = ".",target = "borrowalPK")
     Borrowal getBorrowal(BorrowalDTO dto);
+
+    default BorrowalPK getBorrowalPK(BorrowalDTO dto){
+        return new BorrowalPK(dto.getMemberId(),dto.getBookId());
+    }
 
     BorrowalDTO getBorrowalDTO(Borrowal borrowal);
 
