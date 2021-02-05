@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class BookDTO implements Serializable {
-    private String id;
+    private Integer id;
     private String name;
     private String category;
     private String author;

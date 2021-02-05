@@ -13,7 +13,7 @@ import java.util.List;
 public class Book implements SuperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -25,7 +25,7 @@ public class Book implements SuperEntity {
     @OneToMany(mappedBy = "book")
     private List<Borrowal> book2Member;
 
-    public Book(String id, String name, String category, String author) {
+    public Book(Integer id, String name, String category, String author) {
         this.id = id;
         this.name = name;
         this.category = category;

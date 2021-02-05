@@ -11,7 +11,7 @@ import java.util.List;
 public class Member implements SuperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -25,7 +25,7 @@ public class Member implements SuperEntity {
     @OneToMany(mappedBy = "member")
     private List<Borrowal> member2Book;
 
-    public Member(String id, Gender gender, Name name, String contact) {
+    public Member(Integer id, Gender gender, Name name, String contact) {
         this.id = id;
         this.gender = gender;
         this.name = name;

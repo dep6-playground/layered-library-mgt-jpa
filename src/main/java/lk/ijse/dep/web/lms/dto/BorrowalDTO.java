@@ -11,7 +11,7 @@ import java.sql.Date;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class BorrowalDTO implements Serializable {
 
-    private String memberId;
-    private String bookId;
+    private Integer memberId;
+    private Integer bookId;
     private Date borrowedDate;
 }

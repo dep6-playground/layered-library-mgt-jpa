@@ -14,8 +14,10 @@ import java.io.Serializable;
 public class BorrowalPK implements Serializable {
 
     @Column(name = "member_id")
-    private String memberId;
+    private Integer memberId;
 
     @Column(name = "book_id")
-    private String bookId;
+    private Integer bookId;
+
+
 }

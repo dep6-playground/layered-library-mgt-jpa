@@ -34,7 +34,7 @@ public class Borrowal implements SuperEntity {
         this.borrowedDate = borrowedDate;
     }
 
-    public Borrowal(String memberId, String bookId, Date borrowedDate) {
+    public Borrowal(Integer memberId, Integer bookId, Date borrowedDate) {
         this.borrowalPK = new BorrowalPK(memberId,bookId);
         this.borrowedDate = borrowedDate;
     }

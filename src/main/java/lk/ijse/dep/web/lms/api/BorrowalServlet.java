@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-@WebServlet(name = "BorrowalServlet", value = "/api/v1/registers/*")
+@WebServlet(name = "BorrowalServlet", value = "/api/v1/borrowals/*")
 public class BorrowalServlet extends HttpServlet {
     final Logger logger = LoggerFactory.getLogger(BorrowalServlet.class);
 

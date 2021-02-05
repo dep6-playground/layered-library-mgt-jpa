@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class MemberDTO implements Serializable {
-    private String id;
+    private Integer id;
     private Name name;
     private String contact;
     private Gender gender;
