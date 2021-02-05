@@ -2,8 +2,8 @@ package lk.ijse.dep.web.lms.api;
 
 import lk.ijse.dep.web.lms.business.BOFactory;
 import lk.ijse.dep.web.lms.business.BOTypes;
-import lk.ijse.dep.web.lms.business.custom.RegisterBO;
-import lk.ijse.dep.web.lms.dto.RegisterDTO;
+import lk.ijse.dep.web.lms.business.custom.BorrowalBO;
+import lk.ijse.dep.web.lms.dto.BorrowalDTO;
 import lk.ijse.dep.web.lms.exception.HttpResponseException;
 import lk.ijse.dep.web.lms.exception.ResponseExceptionUtil;
 import org.slf4j.Logger;
@@ -43,15 +43,15 @@ public class BorrowalServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
 
         try{
-            RegisterDTO dto = jsonb.fromJson(request.getReader(), RegisterDTO.class);
+            BorrowalDTO dto = jsonb.fromJson(request.getReader(), BorrowalDTO.class);
 
-            if (dto.getStudentId() == null || dto.getCourseCode() ==null || dto.getRegisterFee()==null || dto.getRegisteredDate() ==null) {
+            if (dto.getMemberId() == null || dto.getBookId() ==null || dto.getBorrowedDate()==null) {
                 throw new HttpResponseException(400, "Invalid details", null);
             }
 
-            RegisterBO registerBO = BOFactory.getInstance().getBO(BOTypes.REGISTER);
-            registerBO.setEntityManager(em);
-            registerBO.saveRegister(dto);
+            BorrowalBO borrowalBO = BOFactory.getInstance().getBO(BOTypes.BORROWAL);
+            borrowalBO.setEntityManager(em);
+            borrowalBO.saveBorrowal(dto);
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.setContentType("application/json");
             response.getWriter().println(jsonb.toJson(dto));
@@ -62,6 +62,26 @@ public class BorrowalServlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }finally {
+            em.close();
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Jsonb jsonb = JsonbBuilder.create();
+
+        final EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManager em = emf.createEntityManager();
+
+        try{
+            response.setContentType("application/json");
+            BorrowalBO borrowalBO = BOFactory.getInstance().getBO(BOTypes.BORROWAL);
+            borrowalBO.setEntityManager(em);
+            response.getWriter().println(jsonb.toJson(borrowalBO.findAllBorrowals()));
+
+        } catch (Throwable t) {
+            ResponseExceptionUtil.handle(t, response);
+        } finally {
             em.close();
         }
     }
